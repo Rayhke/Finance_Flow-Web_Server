@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="UTF-8"
       xmlns:th="http://www.thymeleaf.org"
-      th:fragment="SidebarFragment">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:replace="common/fragments/config :: ConfigFragment">
+        <!--<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link th:href="@{static/css/style.css}" rel="stylesheet">
+        <link th:href="@{https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css}" rel="stylesheet">
+        <title>Dashboard Sidebar Menu | Dark-Light Mode</title>-->
+    </head>
 
     <body>
         <nav class="sidebar close">
@@ -95,10 +104,10 @@
             <div class="text">Finance Flow</div>
         </section>
 
-        <!--<content>
+        <content>
             <th:block layout:fragment="Content"></th:block>
         </content>
 
-        <th:block th:replace="common/fragments/script :: ScriptFragment"></th:block>-->
+        <th:block th:replace="common/fragments/script :: ScriptFragment"></th:block>
     </body>
 </html>
