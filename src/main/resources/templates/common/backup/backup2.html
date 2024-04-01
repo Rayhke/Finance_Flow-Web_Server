@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="UTF-8"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:replace="common/fragments/config :: ConfigFragment">
+    <!--<head>
+        &lt;!&ndash; Common Header &ndash;&gt;
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        &lt;!&ndash; Common CSS &ndash;&gt;
+        <link th:inline="css" th:href="@{static/css/style.css}" rel="stylesheet">
+        <link th:href="@{https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css}" rel="stylesheet">
+        <link th:href="@{static/image/favicon.ico}" rel="icon" type="image/x-icon">
+
+        <title>Finance Flow</title>
+    </head>-->
+    </head>
+
+    <body>
+        <div style="display: flex;">
+            <div>
+                <sidebar th:replace="common/fragments/sidebar :: SidebarFragment"></sidebar>
+            </div>
+
+            <th:block layout:fragment="Content"></th:block>
+        </div>
+
+        <!-- Common JS -->
+        <script th:src="@{static/js/script.js}"></script>
+    </body>
+</html>

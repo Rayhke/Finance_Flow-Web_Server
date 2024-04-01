@@ -12,8 +12,13 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("forum/")
+    @GetMapping("calenders/")
+    public String calender() {
+        return "calenders";
+    }
+
+    @GetMapping("finances/")
     public String test() {
-        return "test";
+        return "finances";
     }
 }

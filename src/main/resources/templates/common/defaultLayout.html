@@ -2,32 +2,119 @@
 <html lang="UTF-8"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head th:replace="common/fragments/config :: ConfigFragment">
-    <!--<head>
-        &lt;!&ndash; Common Header &ndash;&gt;
+    <head>                                              <!-- th:replace="common/fragments/config :: ConfigFragment" -->
+        <!-- Common Header -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        &lt;!&ndash; Common CSS &ndash;&gt;
-        <link th:inline="css" th:href="@{static/css/style.css}" rel="stylesheet">
+        <!-- Common CSS -->
+        <link th:inline="css" th:href="@{/static/css/style.css}" rel="stylesheet">
         <link th:href="@{https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css}" rel="stylesheet">
-        <link th:href="@{static/image/favicon.ico}" rel="icon" type="image/x-icon">
+        <link th:href="@{/static/image/favicon.ico}" rel="icon" type="image/x-icon">
 
         <title>Finance Flow</title>
-    </head>-->
     </head>
 
     <body>
-        <div style="display: flex;">
-            <div>
-                <sidebar th:replace="common/fragments/sidebar :: SidebarFragment"></sidebar>
-            </div>
+        <nav class="sidebar close">
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                        <img th:src="@{static/image/logo.png}" alt="logo">
+                    </span>
 
+                    <div class="text header-text">
+                        <span class="name">Finance Flow</span>
+                        <span class="profession">Web developer</span>
+                    </div>
+                </div>
+
+                <i class='bx bx-chevron-right toggle'></i>
+            </header>
+
+            <div class="menu-bar">
+                <div class="menu-links">
+                    <li class="search-box">
+                        <a href="#">
+                            <i class='bx bx-search icon'></i>
+                            <input type="text" placeholder="Search...">
+                        </a>
+                    </li>
+
+                    <ul class="menu-links">
+                        <li class="nav-link">
+                            <a th:href="@{/}">
+                                <i class='bx bx-home-alt icon'></i>
+                                <span class="text nav-text">Home</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a th:href="@{/finances/}">
+                                <i class='bx bx-bar-chart-alt-2 icon'></i>
+                                <span class="text nav-text">Revenue</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">Notifications</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a th:href="@{/calenders/}">
+                                <i class='bx bx-pie-chart-alt icon'></i>
+                                <span class="text nav-text">Analytics</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-heart icon'></i>
+                                <span class="text nav-text">Likes</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-wallet icon'></i>
+                                <span class="text nav-text">Wallets</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bottom-content">
+                    <li class="">
+                        <a href="#">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
+                        </a>
+                    </li>
+
+                    <li class="mode">
+                        <div class="moon-sun">
+                            <i class='bx bx-moon icon moon'></i>
+                            <i class='bx bx-sun icon sun'></i>
+                        </div>
+                        <span class="mode-text text">Dark Mode</span>
+
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </nav>
+
+        <section class="home">
             <th:block layout:fragment="Content"></th:block>
-        </div>
+        </section>
 
         <!-- Common JS -->
-        <script th:src="@{static/js/script.js}"></script>
+        <script th:src="@{/static/js/script.js}"></script>
     </body>
 </html>
