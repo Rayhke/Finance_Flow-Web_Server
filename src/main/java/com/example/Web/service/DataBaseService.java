@@ -1,5 +1,5 @@
 package com.example.Web.service;
 
-public interface PageService {
+public interface DataBaseService {
 
 }

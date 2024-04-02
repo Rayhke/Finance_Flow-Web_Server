@@ -12,13 +12,13 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("calenders/")
-    public String calender() {
-        return "calenders";
+    @GetMapping("finances/")    // 장부
+    public String finance() {
+        return "finances";
     }
 
-    @GetMapping("finances/")
-    public String test() {
-        return "finances";
+    @GetMapping("calendars/")   // 캘린더
+    public String calendar() {
+        return "calendars";
     }
 }
