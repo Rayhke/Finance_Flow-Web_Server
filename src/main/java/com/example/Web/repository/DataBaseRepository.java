@@ -8,7 +8,5 @@ public interface DataBaseRepository {
 
     void socketClose();
 
-    String save(MemberDTO memberDTO);
-
-
+    String send(MemberDTO memberDTO);
 }
