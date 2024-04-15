@@ -1,6 +1,6 @@
 package com.example.Web.repository;
 
-import com.example.Web.controller.dto.MemberDTO;
+import com.example.Web.controller.dto.UserDTO;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 
@@ -13,6 +13,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class DataBaseTcpRepository implements DataBaseRepository {
+
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 13555;
 
     private Socket socket;
     private BufferedReader in;
@@ -53,7 +56,7 @@ public class DataBaseTcpRepository implements DataBaseRepository {
      * JSONObject json = new JSONObject("{'age' : 20, 'name' : 'test'}");
      */
     @Override
-    public String send(MemberDTO memberDTO) {
+    public String send(UserDTO userDTO) {
         socketConnect();
 
         /**
@@ -61,8 +64,8 @@ public class DataBaseTcpRepository implements DataBaseRepository {
          * VO 는 변하지 않는다
          * */
 
-        ArrayList<MemberDTO> list = new ArrayList<>();
-        list.add(memberDTO);
+        ArrayList<UserDTO> list = new ArrayList<>();
+        list.add(userDTO);
 
         JSONObject json = new JSONObject();
         json.put("list", list);
@@ -87,6 +90,6 @@ public class DataBaseTcpRepository implements DataBaseRepository {
         } finally {
             socketClose();
         }
-        return memberDTO.getUser_id();
+        return userDTO.getUser_id();
     }
 }

@@ -97,8 +97,43 @@
                 </div>
 
                 <div class="bottom-content">
+                    <!--<th:block th:if = "${#strings.isEmpty(lang)}" th:text="${lang}">
+
+                    </th:block>
+                    <th:block th:unless = "${#strings.isEmpty(lang)}" th:text="${lang.replaceAll(',',' #')}">
+
+                    </th:block>-->
+
                     <li class="">
-                        <a href="#">
+                        <a th:href="@{/user/insert}">
+                            <i class='bx bx-user-plus icon'></i>
+                            <span class="text nav-text">회원가입</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a th:href="@{/user/delete}">
+                            <i class='bx bx-user-minus icon'></i>
+                            <span class="text nav-text">회원탈퇴</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a th:href="@{/user/select}">
+                            <i class='bx bx-search icon'></i>
+                            <span class="text nav-text">회원찾기</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a th:href="@{/}">
+                            <i class='bx bx-log-in icon'></i>
+                            <span class="text nav-text">Login</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a th:href="@{/}">
                             <i class='bx bx-log-out icon'></i>
                             <span class="text nav-text">Logout</span>
                         </a>

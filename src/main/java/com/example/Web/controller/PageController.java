@@ -1,24 +1,20 @@
 package com.example.Web.controller;
 
-import com.example.Web.controller.dto.MemberDTO;
-import com.example.Web.repository.DataBaseTcpRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
 public class PageController {
 
-    public String home() {
+    public String home() {      // 홈
         return "index";
     }
 
-    @GetMapping("finances/")    // 장부
-    public String finance() {
-        return "finances";
+    @GetMapping("members/")     // 회원 관련
+    public String member() {
+        return "member";
     }
 
     @GetMapping("calendars/")   // 캘린더
@@ -26,10 +22,8 @@ public class PageController {
         return "calendars";
     }
 
-    @PostMapping("finances/")
-    public String save(@ModelAttribute MemberDTO memberDTO) {
-        DataBaseTcpRepository tcp = new DataBaseTcpRepository();
-        tcp.send(memberDTO);
-        return "index";
+    @GetMapping("finances/")    // 장부
+    public String finance() {
+        return "finances";
     }
 }

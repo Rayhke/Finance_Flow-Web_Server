@@ -1,6 +1,6 @@
 package com.example.Web.repository;
 
-import com.example.Web.controller.dto.MemberDTO;
+import com.example.Web.controller.dto.UserDTO;
 
 public interface DataBaseRepository {
 
@@ -8,5 +8,5 @@ public interface DataBaseRepository {
 
     void socketClose();
 
-    String send(MemberDTO memberDTO);
+    String send(UserDTO userDTO);
 }
