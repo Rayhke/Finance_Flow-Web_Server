@@ -6,6 +6,7 @@
       layout:fragment="Content">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <style th:inline="css" type="text/css">
             body {
@@ -16,64 +17,42 @@
     </head>
 
     <body>
-        <div class="wrapper">
-            <header>
-                <div class="nav">
-                    <button class="material-icons"> chevron_left </button>
-                    <p class="current-date">September 2022</p>
-                    <button class="material-icons"> chevron_right </button>
-                </div>
-            </header>
+        <input type="date" id="date" name="date" value="" max="">
+        <div id="dateInfo"></div>
 
-            <div class="calendar">
-                <ul class="weeks">
-                    <li>Sun</li>
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
-                    <li>Sat</li>
-                </ul>
+        <form>
+            <tr>
+                <td>이름</td>
 
-                <ul class="days">
-                    <li class="inactive">27</li>
-                    <li class="inactive">28</li>
-                    <li class="inactive">29</li>
-                    <li class="inactive">30</li>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
-                    <li>7</li>
-                    <li>8</li>
-                    <li>9</li>
-                    <li>10</li>
-                    <li>11</li>
-                    <li>12</li>
-                    <li>13</li>
-                    <li>14</li>
-                    <li>15</li>
-                    <li>16</li>
-                    <li>17</li>
-                    <li>18</li>
-                    <li>19</li>
-                    <li>20</li>
-                    <li>21</li>
-                    <li>22</li>
-                    <li>23</li>
-                    <li>24</li>
-                    <li>25</li>
-                    <li>26</li>
-                    <li>27</li>
-                    <li>28</li>
-                    <li>29</li>
-                    <li>30</li>
-                    <li>31</li>
-                </ul>
-            </div>
-        </div>
+            </tr><br>
+        </form>
     </body>
+
+    <script>
+        // 현재 날짜 가져오기
+        var currentDate = new Date();
+
+        // YYYY-MM-DD 형식으로 변환
+        var formattedDate = currentDate.toISOString().split('T')[0];
+
+        // input 요소의 max 속성에 현재 날짜 설정
+        document.getElementById("date").setAttribute("max", formattedDate);
+        document.getElementById("date").setAttribute("value", formattedDate);
+
+        document.getElementById("date").addEventListener("input", function() {
+            // input 요소에서 선택한 날짜 가져오기
+            var selectedDate = this.value;
+
+            // 선택한 날짜에 대한 Date 객체 생성
+            var selectedDateObj = new Date(selectedDate);
+
+            // 선택한 날짜에 대한 요일 가져오기
+            var dayOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+            var selectedDayOfWeek = dayOfWeek[selectedDateObj.getDay()];
+
+            // 선택한 날짜에 대한 텍스트 표시
+            var selectedFormattedText = selectedDateObj.getFullYear() + '년 ' + (selectedDateObj.getMonth() + 1) + '월 ' + selectedDateObj.getDate() + '일 ' + selectedDayOfWeek + '요일';
+            document.getElementById("dateInfo").textContent = selectedFormattedText;
+        });
+    </script>
 </html>

@@ -44,7 +44,9 @@
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 
-		<!--<dependency>
+		<!-- ========================================================================= -->
+		<!-- ========================================================================= -->
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.6.15.Final</version>
@@ -65,15 +67,16 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
-		</dependency>-->
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 		<!-- ========================================================================= -->
+		<!-- ========================================================================= -->
+
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
@@ -87,6 +90,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.10.1</version>
 		</dependency>
+
 		<!-- ========================================================================= -->
 
 		<dependency>

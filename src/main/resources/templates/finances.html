@@ -4,9 +4,214 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/defaultLayout}"
       layout:fragment="Content">
-    <body>
-        <div class="text">
-            <h1>이후 만들 예정</h1>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록 작성</title>
+
+    <style th:inline="css" type="text/css">
+        body {
+            margin: auto;
+            background: gray;
+            width: 66%;
+            border: 5px;
+        }
+
+        .item {
+            margin-bottom: 10px;
+            position: relative; /* 상대적 위치 설정 */
+        }
+
+        .item button {
+            margin-left: 10px;
+        }
+
+        .edit-form {
+            position: absolute; /* 절대적 위치 설정 */
+            top: -180px; /* 아이템 위로 올라가도록 조정 */
+            background-color: white;
+            padding: 10px;
+            border: 1px solid black;
+            z-index: 1; /* 다른 요소 위에 나타나도록 설정 */
+            display: none; /* 초기에는 숨김 */
+        }
+    </style>
+</head>
+
+<body>
+<div class="text">
+    <h1>목록 작성하기</h1>
+    <form id="listForm">
+        <label for="author">작성자:</label>
+        <input type="text" id="author" name="author"><br>
+        <label for="category">카테고리:</label>
+        <input type="text" id="category" name="category"><br>
+        <label for="content">내용:</label>
+        <input type="text" id="content" name="content"><br>
+        <label for="unitPrice">단일 가격:</label>
+        <input type="number" id="unitPrice" name="unitPrice"><br>
+        <label for="quantity">갯수:</label>
+        <input type="number" id="quantity" name="quantity"><br>
+        <label for="date">일자:</label>
+        <input type="date" id="date" name="date"><br>
+        <button type="button" onclick="addItem()">추가</button>
+    </form>
+    <div id="listContainer"></div>
+    <button onclick="saveData()">저장</button>
+</div>
+
+<!-- 수정 폼 -->
+<div id="editForm" class="edit-form">
+    <h2>항목 수정하기</h2>
+    <label for="editAuthor">작성자:</label>
+    <input type="text" id="editAuthor" name="editAuthor"><br>
+    <label for="editCategory">카테고리:</label>
+    <input type="text" id="editCategory" name="editCategory"><br>
+    <label for="editContent">내용:</label>
+    <input type="text" id="editContent" name="editContent"><br>
+    <label for="editUnitPrice">단일 가격:</label>
+    <input type="number" id="editUnitPrice" name="editUnitPrice"><br>
+    <label for="editQuantity">갯수:</label>
+    <input type="number" id="editQuantity" name="editQuantity"><br>
+    <label for="editDate">일자:</label>
+    <input type="date" id="editDate" name="editDate"><br>
+    <button onclick="saveEdit()">저장</button>
+    <button onclick="cancelEdit()">취소</button>
+</div>
+
+<script>
+    let itemList = [];
+    let editingIndex = -1;
+
+    function addItem() {
+        const author = document.getElementById('author').value;
+        const category = document.getElementById('category').value;
+        const content = document.getElementById('content').value;
+        const unitPrice = document.getElementById('unitPrice').value;
+        const quantity = document.getElementById('quantity').value;
+        const totalPrice = quantity * unitPrice;
+        const date = document.getElementById('date').value;
+
+        const newItem = {
+            author: author,
+            category: category,
+            content: content,
+            unitPrice: unitPrice,
+            quantity: quantity,
+            totalPrice: totalPrice,
+            date: date
+        };
+
+        itemList.push(newItem);
+        updateList();
+    }
+
+    function updateList() {
+        const listContainer = document.getElementById('listContainer');
+        listContainer.innerHTML = '';
+
+        itemList.forEach((item, index) => {
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('item');
+            itemElement.textContent = `${item.author} / ${item.category} / ${item.content} / ${item.unitPrice} / ${item.quantity} / ${item.totalPrice} / ${item.date}`;
+            listContainer.appendChild(itemElement);
+
+            // 수정 버튼 추가
+            const editButton = document.createElement('button');
+            editButton.textContent = '수정';
+            editButton.onclick = () => editItem(index);
+            itemElement.appendChild(editButton);
+
+            // 삭제 버튼 추가
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '삭제';
+            deleteButton.onclick = () => deleteItem(index);
+            itemElement.appendChild(deleteButton);
+        });
+    }
+
+    function editItem(index) {
+        const item = itemList[index];
+        document.getElementById('editAuthor').value = item.author;
+        document.getElementById('editCategory').value = item.category;
+        document.getElementById('editContent').value = item.content;
+        document.getElementById('editUnitPrice').value = item.unitPrice;
+        document.getElementById('editQuantity').value = item.quantity;
+        document.getElementById('editDate').value = item.date;
+
+        // 현재 수정 중인 아이템의 인덱스 저장
+        editingIndex = index;
+
+        // 수정 폼 위치 설정
+        const itemElement = document.querySelector('.item:nth-child(' + (index + 1) + ')');
+        const editForm = document.getElementById('editForm');
+        editForm.style.top = (itemElement.offsetTop - editForm.offsetHeight - 10) + 'px';
+
+        // 수정 폼 표시
+        editForm.style.display = 'block';
+    }
+
+    function deleteItem(index) {
+        // 선택한 아이템 삭제
+        itemList.splice(index, 1);
+
+        updateList();
+    }
+
+    function saveEdit() {
+        const editedItem = {
+            author: document.getElementById('editAuthor').value,
+            category: document.getElementById('editCategory').value,
+            content: document.getElementById('editContent').value,
+            unitPrice: document.getElementById('editUnitPrice').value,
+            quantity: document.getElementById('editQuantity').value,
+            totalPrice: document.getElementById('editQuantity').value * document.getElementById('editUnitPrice').value,
+            date: document.getElementById('editDate').value
+        };
+
+        // 수정된 아이템으로 대체
+        itemList[editingIndex] = editedItem;
+
+        // 수정 폼 숨기기
+        document.getElementById('editForm').style.display = 'none';
+
+        updateList();
+    }
+
+    function cancelEdit() {
+        // 수정 폼 숨기기
+        document.getElementById('editForm').style.display = 'none';
+    }
+
+    function saveData() {
+        fetch('/test/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(itemList.map(item => {
+                return {
+                    author: item.author,
+                    category: item.category,
+                    content: item.content,
+                    unitPrice: item.unitPrice,
+                    quantity: item.quantity,
+                    totalPrice: item.totalPrice,
+                    date: item.date
+                };
+            }))
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            alert('데이터가 성공적으로 저장되었습니다.');
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+            alert('데이터를 저장하는 도중 오류가 발생했습니다.');
+        });
+    }
+</script>
+</body>
 </html>
