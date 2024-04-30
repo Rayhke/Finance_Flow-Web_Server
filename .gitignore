@@ -40,4 +40,5 @@ src/main/resources/META-INF/*
 src/main/resources/static/*
 src/main/resources/application.properties
 src/main/resources/application.yml
-/src/main/resources/templates/common/backup/
+src/main/resources/templates/common/backup/*
+src/main/java/com/example/Web/test/*
