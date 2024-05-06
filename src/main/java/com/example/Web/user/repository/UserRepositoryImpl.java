@@ -1,31 +1,45 @@
-package com.example.Web.repository;
+package com.example.Web.user.repository;
 
-import com.example.Web.controller.dto.UserDTO;
-import com.google.gson.Gson;
+import com.example.Web.common.socket.SocketHandler;
+import com.example.Web.common.socket.SocketHandlerImpl;
 import com.google.gson.JsonObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
+public class UserRepositoryImpl extends SocketHandlerImpl implements UserRepository {
 
-public class UserTcpRepository implements UserRepository {
+    private final SocketHandler socketHandler;
 
-    private static final String HOST = "127.0.0.1";
+    @Autowired
+    public UserRepositoryImpl(SocketHandler socketHandler) {
+        this.socketHandler = socketHandler;
+    }
+
+    public String request(JsonObject json) {
+        socketHandler.socketConnect();
+        socketHandler.socketRead();
+        socketHandler.socketWrite();
+
+        String result = request(json.toString());
+        socketHandler.socketClose();
+
+        return result;
+    }
+
+    /*private static final String HOST = "127.0.0.1";
     private static final int PORT = 13555;
 
     private Socket socket;
     private BufferedReader in;
     private BufferedWriter out;
 
+
+
     @Override
     public void socketConnect() {
         try {
             socket = new Socket(HOST, PORT);
         } catch (IOException e) {
-            /** 의도치 않은 input을 건내줌 */
+            *//** 의도치 않은 input을 건내줌 *//*
             throw new IllegalArgumentException(
                 "==================================================================================" +
                 "\n\n\n[서버 소켓과의 연결 실패] : " + e + "\n\n\n" +
@@ -41,7 +55,6 @@ public class UserTcpRepository implements UserRepository {
             throw new IllegalArgumentException("[Read 연결 실패] : " + e);
         }
     }
-
 
     @Override
     public void socketWrite() {
@@ -59,7 +72,7 @@ public class UserTcpRepository implements UserRepository {
             if (in != null) in.close();
             socket.close();
         } catch (IOException e) {
-            /** 의도치 않은 output을 받음 */
+            *//** 의도치 않은 output을 받음 *//*
             throw new IllegalStateException(
                 "==================================================================================" +
                 "\n\n\n[클라이언트 소켓의 종료 실패] : " + e + "\n\n\n" +
@@ -71,11 +84,6 @@ public class UserTcpRepository implements UserRepository {
     public String insertUsers(UserDTO userDTO) {
         socketConnect(); socketWrite(); socketRead();
 
-        // JSONObject json = new JSONObject();
-        /*json.put("entity", "user");
-        json.put("mode", "insert");
-        json.put("userDTO", userDTO);*/
-        // out.write(new Gson().toJson(json));
         Gson gson = new Gson();
         JsonObject json = new JsonObject();
 
@@ -92,7 +100,7 @@ public class UserTcpRepository implements UserRepository {
             socketClose();
         }
 
-        return userDTO.getUser_id();
+        return userDTO.getId();
     }
 
     @Override
@@ -127,5 +135,5 @@ public class UserTcpRepository implements UserRepository {
     public String deleteUsers(String user_id) {
         socketConnect(); socketRead(); socketWrite();
         return null;
-    }
+    }*/
 }

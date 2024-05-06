@@ -19,9 +19,12 @@
         <div class="text">
             <h1>Content 영역입니다.</h1><br>
             <h1>Home Page</h1>
-            <form>
-
-            </form>
+            <div th:if="${session}">
+                <p>[로그인 유저 : <span th:text="${session.userId}"></span>]</p>
+            </div>
+            <div th:unless="${session}">
+                <p>[비 로그인 상태]</p>
+            </div>
         </div>
     </body>
 </html>

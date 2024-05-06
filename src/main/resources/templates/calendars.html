@@ -7,11 +7,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <style th:inline="css" type="text/css">
             body {
-                margin: 30px;
-                border: 1px;
+                margin: auto;
+                width: 66%;
+                border: 5px;
             }
         </style>
     </head>
@@ -20,12 +20,33 @@
         <input type="date" id="date" name="date" value="" max="">
         <div id="dateInfo"></div>
 
-        <form>
-            <tr>
-                <td>이름</td>
+        <div th:if="${List}">
+            <table>
+                <thead>
+                    <tr>
+                        <td>[작성자]</td>
+                        <td>[카테고리]</td>
+                        <td>[내용]</td>
+                        <td>[단품 가격]</td>
+                        <td>[갯수]</td>
+                        <td>[전체 가격]</td>
+                        <td>[날짜]</td>
+                    </tr>
+                </thead>
 
-            </tr><br>
-        </form>
+                <tbody>
+                    <tr th:each="ob : ${List}">
+                        <td><span th:text="${ob.author}"/></td>
+                        <td><span th:text="${ob.category}"/></td>
+                        <td><span th:text="${ob.content}"/></td>
+                        <td><span th:text="${ob.unitPrice}"/></td>
+                        <td><span th:text="${ob.quantity}"/></td>
+                        <td><span th:text="${ob.totalPrice}"/></td>
+                        <td><span th:text="${ob.date}"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 
     <script>
